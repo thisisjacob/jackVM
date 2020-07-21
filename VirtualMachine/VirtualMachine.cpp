@@ -6,10 +6,12 @@
 
 int main()
 {
-
-    Parser par = Parser(std::ifstream("test.txt"));
+    std::ifstream test = std::ifstream("StackTest.vm");
+    Parser par = Parser(std::ifstream("StackTest.vm"));
+    par.advance();
+    par.commandType();
+    par.hasMoreCommands();
     std::cout << "Hello World!\n";
-    
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

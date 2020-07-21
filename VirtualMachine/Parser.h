@@ -1,5 +1,6 @@
 #pragma once
 #include <fstream>
+#include <iostream>
 #include <string>
 
 class Parser {
@@ -32,4 +33,5 @@ private:
 	std::istream& fileStream;
 	std::string currentLine;
 	VMCommandType currentCommand;
+	VMCommandType findCommandType(std::string command);
 };
