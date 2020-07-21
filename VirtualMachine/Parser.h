@@ -1,9 +1,10 @@
 #pragma once
-#include <iostream>
+#include <fstream>
 #include <string>
 
 class Parser {
 public:
+	// The different types of commands, including NONE for an unrecognized or nonexistent command
 	enum class VMCommandType {
 		C_ARITHMETIC, 
 		C_PUSH, 
@@ -13,12 +14,22 @@ public:
 		C_IF,
 		C_FUNCTION,
 		C_RETURN,
-		C_CALL
+		C_CALL,
+		NONE
 	};
-	Parser(std::istream& file);
+	Parser(std::ifstream&& file);
+	// Returns true if there are more lines in the file
 	bool hasMoreCommands();
+	// Goes down a command, does any needed filtering, sets currentLine and currentCommand
 	void advance();
+	// Returns the VMCommandType of the current line
 	VMCommandType commandType();
+	// Returns the first argument passed to a command
 	std::string arg1();
+	// Returns the second arugment passed to a command
 	std::string arg2();
+private:
+	std::istream& fileStream;
+	std::string currentLine;
+	VMCommandType currentCommand;
 };

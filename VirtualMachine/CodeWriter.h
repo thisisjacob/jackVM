@@ -5,9 +5,11 @@
 
 class CodeWriter {
 public:
-	CodeWriter(std::ostream& outFile);
+	CodeWriter(std::ofstream& outFile);
 	void setFileName(std::string fileName);
 	void writeArithmetic(std::string command);
 	void writePushPop(Parser::VMCommandType command, std::string segment, int index);
 	void close();
+private:
+	std::ostream& outFileStream;
 };

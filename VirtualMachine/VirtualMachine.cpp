@@ -2,10 +2,14 @@
 //
 
 #include <iostream>
+#include "Parser.h"
 
 int main()
 {
+
+    Parser par = Parser(std::ifstream("test.txt"));
     std::cout << "Hello World!\n";
+    
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
