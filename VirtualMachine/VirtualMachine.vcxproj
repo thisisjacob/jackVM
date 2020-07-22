@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="CodeWriter.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="VMEnums.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

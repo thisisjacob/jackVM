@@ -8,8 +8,8 @@ int main()
         par.advance();
         par.commandType();
         par.arg1();
-        if (par.commandType() == Parser::VMCommandType::C_PUSH || par.commandType() == Parser::VMCommandType::C_POP
-            || par.commandType() == Parser::VMCommandType::C_FUNCTION || par.commandType() == Parser::VMCommandType::C_CALL) {
+        if (par.commandType() == VMCommandType::C_PUSH || par.commandType() == VMCommandType::C_POP
+            || par.commandType() == VMCommandType::C_FUNCTION || par.commandType() == VMCommandType::C_CALL) {
             par.arg2();
         }
     }

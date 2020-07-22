@@ -18,7 +18,7 @@ void Parser::advance() {
 	}
 }
 
-Parser::VMCommandType Parser::commandType() { return currentCommand; }
+VMCommandType Parser::commandType() { return currentCommand; }
 
 std::string Parser::arg1() {
 	if (currentCommand == VMCommandType::C_ARITHMETIC) {
@@ -31,7 +31,7 @@ std::string Parser::arg2() {
 	return currentLine.substr(currentLine.find(" ") + 1, std::string::npos);
 }
 
-Parser::VMCommandType Parser::findCommandType(std::string command) {
+VMCommandType Parser::findCommandType(std::string command) {
 	if (command.compare("push") == 0) {
 		return VMCommandType::C_PUSH;
 	}
