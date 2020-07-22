@@ -1,16 +1,21 @@
 #include "Parser.h"
 
-Parser::Parser(std::ifstream&& file) : fileStream{ file }, currentLine{ "" }, currentCommand{ Parser::VMCommandType::NONE } {}
+Parser::Parser(std::string file) {
+	fileStream = std::ifstream(file);
+	currentLine = "";
+	currentCommand = VMCommandType::NONE;
+}
 
 bool Parser::hasMoreCommands() { return fileStream.peek() != EOF; }
 
-// not yet implemented
 void Parser::advance() {
 	std::getline(fileStream, currentLine);
-	currentLine += currentLine.substr(currentLine.find("//"), std::string::npos);
+	currentLine = currentLine.substr(0, currentLine.find("//"));
 	auto testString = currentLine.substr(0, currentLine.find(" "));
 	currentCommand = findCommandType(testString);
-	currentLine = currentLine.substr(currentLine.find(" "), std::string::npos);
+	if (currentLine.find(" ") != std::string::npos) {
+		currentLine = currentLine.substr(currentLine.find(" ") + 1, std::string::npos);
+	}
 }
 
 Parser::VMCommandType Parser::commandType() { return currentCommand; }

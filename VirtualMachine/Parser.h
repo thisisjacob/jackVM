@@ -18,7 +18,7 @@ public:
 		C_CALL,
 		NONE
 	};
-	Parser(std::ifstream&& file);
+	Parser(std::string file);
 	// Returns true if there are more lines in the file
 	bool hasMoreCommands();
 	// Goes down a command, does any needed filtering, sets currentLine and currentCommand
@@ -30,7 +30,7 @@ public:
 	// Returns the second arugment passed to a command
 	std::string arg2();
 private:
-	std::istream& fileStream;
+	std::ifstream fileStream;
 	std::string currentLine;
 	VMCommandType currentCommand;
 	VMCommandType findCommandType(std::string command);
