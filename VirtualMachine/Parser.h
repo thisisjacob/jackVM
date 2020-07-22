@@ -25,9 +25,9 @@ public:
 	void advance();
 	// Returns the VMCommandType of the current line
 	VMCommandType commandType();
-	// Returns the first argument passed to a command
+	// Returns the first argument passed to a command, or the command if the type of the command is an arithmetic type
 	std::string arg1();
-	// Returns the second arugment passed to a command
+	// Returns the second arugment passed to a command, should only be called of findCommandType is C_PUSH, C_POP, C_FUNCTION or C_CALL
 	std::string arg2();
 private:
 	std::ifstream fileStream;

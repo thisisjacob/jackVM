@@ -21,11 +21,14 @@ void Parser::advance() {
 Parser::VMCommandType Parser::commandType() { return currentCommand; }
 
 std::string Parser::arg1() {
-	return "";
+	if (currentCommand == VMCommandType::C_ARITHMETIC) {
+		return currentLine;
+	}
+	return currentLine.substr(0, currentLine.find(" "));
 }
 
 std::string Parser::arg2() {
-	return "";
+	return currentLine.substr(currentLine.find(" ") + 1, std::string::npos);
 }
 
 Parser::VMCommandType Parser::findCommandType(std::string command) {
