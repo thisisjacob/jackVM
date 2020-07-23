@@ -1,6 +1,6 @@
 #include "Parser.h"
 
-Parser::Parser(std::string file) {
+Parser::Parser(const std::string& file) {
 	fileStream = std::ifstream(file);
 	currentLine = "";
 	currentCommand = VMCommandType::NONE;
@@ -31,7 +31,7 @@ std::string Parser::arg2() {
 	return currentLine.substr(currentLine.find(" ") + 1, std::string::npos);
 }
 
-VMCommandType Parser::findCommandType(std::string command) {
+VMCommandType Parser::findCommandType(const std::string& command) {
 	if (command.compare("push") == 0) {
 		return VMCommandType::C_PUSH;
 	}

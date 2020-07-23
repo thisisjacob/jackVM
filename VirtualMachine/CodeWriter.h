@@ -9,11 +9,11 @@ public:
 	CodeWriter();
 	~CodeWriter();
 	// Opens a new file to start writing to
-	void setFileName(std::string fileName);
+	void setFileName(const std::string& fileName);
 	// Writes an arithmetic command to file in assembly code
-	void writeArithmetic(std::string command);
+	void writeArithmetic(const std::string& command);
 	// Writes push/pop to file in assembly code
-	void writePushPop(VMCommandType command, std::string segment, int index);
+	void writePushPop(const VMCommandType command, const std::string& segment, const int index);
 	// Closes the file stream
 	void close();
 private:
