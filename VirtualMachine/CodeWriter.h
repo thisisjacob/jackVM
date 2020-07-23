@@ -18,5 +18,4 @@ public:
 	void close();
 private:
 	std::ofstream outFileStream;
-	int stackPointer;
 };

@@ -141,11 +141,13 @@
   <ItemGroup>
     <ClCompile Include="CodeWriter.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="UtilityFunctions.cpp" />
     <ClCompile Include="VirtualMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CodeWriter.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="UtilityFunctions.h" />
     <ClInclude Include="VMEnums.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

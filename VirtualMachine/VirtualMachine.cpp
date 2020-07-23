@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Parser.h"
 #include "CodeWriter.h"
+#include "UtilityFunctions.h"
 
 int main()
 {
@@ -13,12 +14,13 @@ int main()
         par.advance();
         par.commandType();
         par.arg1();
-        if (par.commandType() == VMCommandType::C_PUSH || par.commandType() == VMCommandType::C_POP
-            || par.commandType() == VMCommandType::C_FUNCTION || par.commandType() == VMCommandType::C_CALL) {
+        if (UtilityFunctions::isMemoryOrProgramCommand(par.commandType())) {
             writer.writePushPop(par.commandType(), par.arg1(), 256);
+            ++address;
         }
         else {
             writer.writeArithmetic(par.arg1());
+            --address;
         }
     }
 }
