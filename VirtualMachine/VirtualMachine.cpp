@@ -12,13 +12,11 @@ int main()
     int address = 256; 
     while (par.hasMoreCommands()) {
         par.advance();
-        par.commandType();
-        par.arg1();
         if (UtilityFunctions::isMemoryOrProgramCommand(par.commandType())) {
-            writer.writePushPop(par.commandType(), par.arg1(), 256);
+            writer.writePushPop(par.commandType(), par.arg2(), address);
             ++address;
         }
-        else {
+        else if (par.commandType() != VMCommandType::NONE) {
             writer.writeArithmetic(par.arg1());
             --address;
         }
