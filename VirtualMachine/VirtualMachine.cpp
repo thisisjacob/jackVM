@@ -17,8 +17,12 @@ int main()
             ++address;
         }
         else if (par.commandType() != VMCommandType::NONE) {
-            writer.writeArithmetic(par.arg1(), address);
-            --address;
+            writer.writeArithmetic(par.arg1());
+            if (par.arg1() != "neg" && par.arg1() != "not") { 
+                --address;
+            }
         }
     }
+
+    return 0;
 }

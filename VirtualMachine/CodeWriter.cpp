@@ -2,31 +2,43 @@
 
 CodeWriter::CodeWriter() { outFileStream = std::ofstream(); }
 
-CodeWriter::~CodeWriter() { if (outFileStream.is_open()) { outFileStream.close(); } }
+CodeWriter::~CodeWriter() { 
+	if (outFileStream.is_open()) {
+		outFileStream.close(); }
+}
 
 void CodeWriter::setFileName(const std::string& fileName) { outFileStream.open(fileName); }
 
-void CodeWriter::writeArithmetic(const std::string& command, const int index) {
+void CodeWriter::writeArithmetic(const std::string& command) {
 	if (command.compare("add") == 0) {
-		outFileStream << "D=M+D" << std::endl;
-		outFileStream << "M=D" << std::endl;
+		outFileStream << "A=A-1" << "\n";
+		outFileStream << "D=M+D" << "\n";
+		outFileStream << "M=D" << "\n";
 	}
-	else if (command.compare("sub")) {
-		outFileStream << "D=M-D" << std::endl;
-		outFileStream << "M=D" << std::endl;
+	else if (command.compare("sub") == 0) {
+		outFileStream << "A=A-1" << "\n";
+		outFileStream << "D=M-D" << "\n";
+		outFileStream << "M=D" << "\n";
 	}
-	else if (command.compare("neg")) {
-		//outFileStream << 
+	else if (command.compare("neg") == 0) {
+		outFileStream << "D=-M" << "\n";
+		outFileStream << "M=D" << "\n";
+	}
+	else if (command.compare("eq") == 0) {
+		outFileStream << "D=D-M" << "\n";
+		outFileStream << "M=D" << "\n";
 	}
 }
 
 void CodeWriter::writePushPop(const VMCommandType command, const std::string& segment, const int index) {
 	if (command == VMCommandType::C_PUSH) {
-		outFileStream << ("@" + segment) << std::endl;
-		outFileStream << ("D=A") << std::endl;
-		outFileStream << ("@" + std::to_string(index)) << std::endl;
-		outFileStream << ("M=D") << std::endl;
-		outFileStream << ("@" + std::to_string(index - 1)) << std::endl;
+		outFileStream << ("@" + segment) << "\n";
+		outFileStream << ("D=A") << "\n";
+		outFileStream << ("@" + std::to_string(index)) << "\n";
+		outFileStream << ("M=D") << "\n";
+		// segment put into m
+		outFileStream << "D=M" << "\n";
+		// ends with D pointing at item in index, A pointing at index, M pointing at item in index
 	}
 }
 
