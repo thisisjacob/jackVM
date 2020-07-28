@@ -7,6 +7,7 @@
 class Parser {
 public:
 	Parser(const std::string& file);
+	~Parser();
 	// Returns true if there are more lines in the file
 	bool hasMoreCommands();
 	// Goes down a command, does any needed filtering, sets currentLine and currentCommand

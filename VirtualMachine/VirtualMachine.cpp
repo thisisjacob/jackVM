@@ -5,7 +5,7 @@
 
 int main()
 {
-    Parser par = Parser("SimpleAdd.vm");
+    Parser par("SimpleAdd.vm");
     CodeWriter writer;
     writer.setFileName("SimpleAdd.asm");
     // start at first value in stack
@@ -17,7 +17,7 @@ int main()
             ++address;
         }
         else if (par.commandType() != VMCommandType::NONE) {
-            writer.writeArithmetic(par.arg1());
+            writer.writeArithmetic(par.arg1(), address);
             --address;
         }
     }

@@ -6,6 +6,8 @@ Parser::Parser(const std::string& file) {
 	currentCommand = VMCommandType::NONE;
 }
 
+Parser::~Parser() { if (fileStream.is_open()) { fileStream.close(); } }
+
 bool Parser::hasMoreCommands() { return fileStream.peek() != EOF; }
 
 void Parser::advance() {
