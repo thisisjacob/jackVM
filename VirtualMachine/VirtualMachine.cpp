@@ -1,13 +1,20 @@
 #include <iostream>
+#include <filesystem>
 #include "Parser.h"
 #include "CodeWriter.h"
 #include "UtilityFunctions.h"
 
-int main()
+using namespace std::filesystem;
+
+int main(int argc, char* argv[])
 {
-    Parser par("SimpleAdd.vm");
+    if (argc != 2) { return 1; }
+    path file(argv[1]);
+
+    Parser par(file.string());
     CodeWriter writer;
-    writer.setFileName("SimpleAdd.asm");
+    file.replace_extension(".asm");
+    writer.setFileName(file.string());
     // start at first value in stack
     int address = 256; 
     while (par.hasMoreCommands()) {
