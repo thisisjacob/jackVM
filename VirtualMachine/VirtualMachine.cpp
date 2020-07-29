@@ -6,6 +6,9 @@
 #include "Constants.h"
 using namespace std::filesystem;
 
+// This program converts a .vm file to the Hack assembly language specified in The Elements of Computing Systems
+// This program should be called from the command line, with one argument for a VM file with the extension .vm
+// The assembly version is written to a file having the same name as the given argument, but with a .asm extension
 int main(int argc, char* argv[])
 {
     // checks validity of argument, creates a path to manage the given file
@@ -19,12 +22,14 @@ int main(int argc, char* argv[])
         return 1;
     }
 
+    // Prepares to read and write file
     Parser par(file.string());
     CodeWriter writer;
     file.replace_extension(Constants::OUTPUT_EXTENSION);
     writer.setFileName(file.string());
     // start at first value in stack
     int address = 256; 
+    // Advances through each line and writes the assembly version of each command to file
     while (par.hasMoreCommands()) {
         par.advance();
         if (UtilityFunctions::isMemoryOrProgramCommand(par.commandType())) {
