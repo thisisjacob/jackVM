@@ -6,10 +6,14 @@
 
 using namespace std::filesystem;
 
+
+
 int main(int argc, char* argv[])
 {
+    // invalid number of arguments, end program
     if (argc != 2) { return 1; }
     path file(argv[1]);
+    // check ext using constants
 
     Parser par(file.string());
     CodeWriter writer;
