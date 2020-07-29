@@ -3,21 +3,25 @@
 #include "Parser.h"
 #include "CodeWriter.h"
 #include "UtilityFunctions.h"
-
+#include "Constants.h"
 using namespace std::filesystem;
-
-
 
 int main(int argc, char* argv[])
 {
-    // invalid number of arguments, end program
-    if (argc != 2) { return 1; }
+    // checks validity of argument, creates a path to manage the given file
+    if (argc != 2) { 
+        std::cerr << "Invalid number of arguments.";
+        return 1; 
+    }
     path file(argv[1]);
-    // check ext using constants
+    if (file.extension() != Constants::INPUT_EXTENSION) {
+        std::cerr << "Invalid file extension.";
+        return 1;
+    }
 
     Parser par(file.string());
     CodeWriter writer;
-    file.replace_extension(".asm");
+    file.replace_extension(Constants::OUTPUT_EXTENSION);
     writer.setFileName(file.string());
     // start at first value in stack
     int address = 256; 

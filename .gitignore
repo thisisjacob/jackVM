@@ -341,3 +341,4 @@ healthchecksdb
 /VirtualMachine/StackTest.vm
 /VirtualMachine/SimpleAdd.asm
 /VirtualMachine/SimpleAdd.vm
+/VirtualMachine/SimpleAdd.test

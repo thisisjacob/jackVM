@@ -3,6 +3,7 @@
 
 // This class holds std::string constants for file information and program symbols
 class Constants {
+public:
 	static const std::string INPUT_EXTENSION;
 	static const std::string OUTPUT_EXTENSION;
 	static const std::string ADD;
