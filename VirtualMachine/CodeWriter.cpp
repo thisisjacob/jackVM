@@ -9,7 +9,7 @@ CodeWriter::~CodeWriter() {
 
 void CodeWriter::setFileName(const std::string& fileName) { outFileStream.open(fileName); }
 
-void CodeWriter::writeArithmetic(const std::string& command) {
+void CodeWriter::writeArithmetic(const std::string& command, const int currentAddress) {
 	if (command.compare("add") == 0) {
 		outFileStream << "A=A-1" << "\n";
 		outFileStream << "D=M+D" << "\n";
