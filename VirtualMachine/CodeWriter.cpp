@@ -10,6 +10,7 @@ CodeWriter::~CodeWriter() {
 void CodeWriter::setFileName(const std::string& fileName) { outFileStream.open(fileName); }
 
 void CodeWriter::writeArithmetic(const std::string& command, const int currentAddress) {
+	int address = currentAddress - 1;
 	if (command.compare("add") == 0) {
 		outFileStream << "A=A-1" << "\n";
 		outFileStream << "D=M+D" << "\n";

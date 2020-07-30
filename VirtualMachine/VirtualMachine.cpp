@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
     CodeWriter writer;
     file.replace_extension(Constants::OUTPUT_EXTENSION);
     writer.setFileName(file.string());
-    // start at first value in stack
+    // start at first value in stack, pointing to the next available empty address
     int address = 256; 
     // Advances through each line and writes the assembly version of each command to file
     while (par.hasMoreCommands()) {
@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
             ++address;
         }
         else if (par.commandType() != VMCommandType::NONE) {
-            writer.writeArithmetic(par.arg1());
+            writer.writeArithmetic(par.arg1(), address);
             if (par.arg1() != "neg" && par.arg1() != "not") { 
                 --address;
             }

@@ -11,6 +11,7 @@ public:
 	// Opens a new file to start writing to
 	void setFileName(const std::string& fileName);
 	// Writes an arithmetic command to file in assembly code
+	// currentAddress should be the next available address
 	void writeArithmetic(const std::string& command, const int currentAddress);
 	// Writes push/pop to file in assembly code
 	void writePushPop(const VMCommandType command, const std::string& segment, const int index);
