@@ -10,7 +10,9 @@ CodeWriter::~CodeWriter() {
 void CodeWriter::setFileName(const std::string& fileName) { outFileStream.open(fileName); }
 
 void CodeWriter::writeArithmetic(const std::string& command, const int currentAddress) {
-	int address = currentAddress - 1;
+	// currentAddress is the next available empty address - use these to point to items
+	int firstAddress = currentAddress - 2;
+	int secondAddress = currentAddress - 1;
 	if (command.compare("add") == 0) {
 		outFileStream << "A=A-1" << "\n";
 		outFileStream << "D=M+D" << "\n";
@@ -26,8 +28,30 @@ void CodeWriter::writeArithmetic(const std::string& command, const int currentAd
 		outFileStream << "M=D" << "\n";
 	}
 	else if (command.compare("eq") == 0) {
-		outFileStream << "D=D-M" << "\n";
-		outFileStream << "M=D" << "\n";
+		// checking for equality
+		outFileStream << "@" << firstAddress << "\n";
+		outFileStream << "D=M\n";
+		outFileStream << "@" << secondAddress << "\n";
+		outFileStream << "D=D-M\n";
+		outFileStream << "@ISEQ" << std::to_string(uniqueSymbolCounter) << "\n";
+		outFileStream << "D;JEQ\n";
+		outFileStream << "@NOTEQ" << std::to_string(uniqueSymbolCounter) << "\n";
+		outFileStream << "0;JMP\n";
+		// equal return value
+		outFileStream << "\t(ISEQ" << std::to_string(uniqueSymbolCounter) << ")\n";
+		outFileStream << "@" << firstAddress << "\n";
+		outFileStream << "M=-1\n";
+		outFileStream << "@END" << std::to_string(uniqueSymbolCounter) << "\n";
+		outFileStream << "0;JMP\n";
+		// not equal return value
+		outFileStream << "\t(NOTEQ" << std::to_string(uniqueSymbolCounter) << ")\n";
+		outFileStream << "@" << firstAddress << "\n";
+		outFileStream << "M=0\n";
+		outFileStream << "@END" << std::to_string(uniqueSymbolCounter) << "\n";
+		outFileStream << "0;JMP\n";
+		// end of equality block
+		outFileStream << "\t(END" << std::to_string(uniqueSymbolCounter) << ")\n";
+		uniqueSymbolCounter++;
 	}
 }
 

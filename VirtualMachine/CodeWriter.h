@@ -19,4 +19,5 @@ public:
 	void close();
 private:
 	std::ofstream outFileStream;
+	unsigned int uniqueSymbolCounter = 0;
 };
