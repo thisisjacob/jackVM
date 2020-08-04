@@ -20,4 +20,11 @@ public:
 private:
 	std::ofstream outFileStream;
 	unsigned int uniqueSymbolCounter = 0;
+	// Writes to outFileStream the result of a logical operator
+	// commandName should be the name of the command
+	// comparisonOperator is the comparisonOperator in Assembly language to use
+	// firstAddress is the first address to be compared
+	// secondAddress is the second address to be compared
+	// Result is written into the location of secondAddress (-1 for success, 0 for failure)
+	void writeLogicCommand(const std::string& commandName, const std::string& comparisonOperator, const int firstAddress, const int secondAddress);
 };
