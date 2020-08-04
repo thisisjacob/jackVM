@@ -10,4 +10,11 @@ public:
 	static const std::string SUBTRACT;
 	static const std::string NEGATE;
 	static const std::string EQUALS;
+	static const std::string GREATER_THAN;
+	static const std::string LESS_THAN;
+	static const std::string AND;
+	static const std::string OR;
+	static const std::string NOT;
+	static const std::string PUSH;
+	static const std::string POP;
 };
