@@ -32,30 +32,10 @@ void CodeWriter::writeArithmetic(const std::string& command, const int currentAd
 	}
 	else if (command == "gt") {
 		// checking if firstAddress is greater than secondAddress
-		// TODO: these first for lines for logical operators could be moved into a separate function for code reuse
-		// TODO: return values of comparisons could also be moved into a function for code reuse
-		outFileStream << "@" << firstAddress << "\n";
-		outFileStream << "D=M\n";
-		outFileStream << "@" << secondAddress << "\n";
-		outFileStream << "D=D-M\n";
-		outFileStream << "@ISGREATER" << std::to_string(uniqueSymbolCounter) << "\n";
-		outFileStream << "D;JGT\n";
-		outFileStream << "@NOTGREATER" << std::to_string(uniqueSymbolCounter) << "\n";
-		outFileStream << "0;JMP\n";
-		// greater than return value
-		outFileStream << "\t(ISGREATER" << std::to_string(uniqueSymbolCounter) << ")\n";
-		outFileStream << "@" << firstAddress << "\n";
-		outFileStream << "M=-1\n";
-		outFileStream << "@END" << std::to_string(uniqueSymbolCounter) << "\n";
-		outFileStream << "0;JMP\n";
-		// not greater than return value
-		outFileStream << "\t(NOTGREATER" << std::to_string(uniqueSymbolCounter) << ")\n";
-		outFileStream << "@" << firstAddress << "\n";
-		outFileStream << "M=0\n";
-		outFileStream << "@END" << std::to_string(uniqueSymbolCounter) << "\n";
-		outFileStream << "0;JMP\n";
-		// end of equality block
-		outFileStream << "\t(END" << std::to_string(uniqueSymbolCounter) << ")\n";
+		writeLogicCommand("gt", "JGT", firstAddress, secondAddress);
+	}
+	else if (command == "lt") {
+		writeLogicCommand("lt", "JLT", firstAddress, secondAddress);
 	}
 	uniqueSymbolCounter++;
 }
@@ -88,16 +68,14 @@ void CodeWriter::writeLogicCommand(const std::string& commandName, const std::st
 	outFileStream << "0;JMP\n";
 	// comparison true return value (-1)
 	outFileStream << "\t(IS" << commandName << std::to_string(uniqueSymbolCounter) << ")\n";
-	outFileStream << "@" << secondAddress << "\n";
+	outFileStream << "@" << firstAddress << "\n";
 	outFileStream << "M=-1\n";
 	outFileStream << "@END" << std::to_string(uniqueSymbolCounter) << "\n";
 	outFileStream << "0;JMP\n";
 	// comparison false return value (0)
 	outFileStream << "\t(NOT" << commandName << std::to_string(uniqueSymbolCounter) << ")\n";
-	outFileStream << "@" << secondAddress << "\n";
+	outFileStream << "@" << firstAddress << "\n";
 	outFileStream << "M=0\n";
-	outFileStream << "@END" << std::to_string(uniqueSymbolCounter) << "\n";
-	outFileStream << "0;JMP\n";
 	// end of equality block
 	outFileStream << "\t(END" << std::to_string(uniqueSymbolCounter) << ")\n";
 }
