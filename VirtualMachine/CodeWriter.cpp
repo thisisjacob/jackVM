@@ -28,14 +28,14 @@ void CodeWriter::writeArithmetic(const std::string& command, const int currentAd
 		outFileStream << "M=D" << "\n";
 	}
 	else if (command == Constants::EQUALS) {
-		writeLogicCommand("EQUALS", "JEQ", firstAddress, secondAddress);
+		writeComparisonLogicCommand("EQUALS", "JEQ", firstAddress, secondAddress);
 	}
 	else if (command == Constants::GREATER_THAN) {
 		// checking if firstAddress is greater than secondAddress
-		writeLogicCommand("GREATERTHAN", "JGT", firstAddress, secondAddress);
+		writeComparisonLogicCommand("GREATERTHAN", "JGT", firstAddress, secondAddress);
 	}
 	else if (command == Constants::LESS_THAN) {
-		writeLogicCommand("LESSTHAN", "JLT", firstAddress, secondAddress);
+		writeComparisonLogicCommand("LESSTHAN", "JLT", firstAddress, secondAddress);
 	}
 	uniqueSymbolCounter++;
 }
@@ -56,7 +56,7 @@ void CodeWriter::writePushPop(const VMCommandType command, const std::string& se
 
 void CodeWriter::close() { if (outFileStream.is_open()) { outFileStream.close(); } }
 
-void CodeWriter::writeLogicCommand(const std::string& commandName, const std::string& comparisonOperator, const int firstAddress, const int secondAddress) {
+void CodeWriter::writeComparisonLogicCommand(const std::string& commandName, const std::string& comparisonOperator, const int firstAddress, const int secondAddress) {
 	// checking for equality
 	outFileStream << "@" << firstAddress << "\n";
 	outFileStream << "D=M\n";

@@ -26,5 +26,5 @@ private:
 	// comparisonOperator is the comparisonOperator in Assembly language to use
 	// item in firstAddress is compared to item in secondAddress
 	// Result is written into the location of secondAddress (-1 for success, 0 for failure)
-	void writeLogicCommand(const std::string& commandName, const std::string& comparisonOperator, const int firstAddress, const int secondAddress);
+	void writeComparisonLogicCommand(const std::string& commandName, const std::string& comparisonOperator, const int firstAddress, const int secondAddress);
 };
