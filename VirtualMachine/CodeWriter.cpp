@@ -46,6 +46,18 @@ void CodeWriter::writeArithmetic(const std::string& command, const int currentAd
 		outFileStream << "@" << std::to_string(firstAddress) << "\n";
 		outFileStream << "M=D\n";
 	}
+	else if (command == Constants::OR) {
+		outFileStream << "@" << firstAddress << "\n";
+		outFileStream << "D=M\n";
+		outFileStream << "@" << secondAddress << "\n";
+		outFileStream << "D=D|M\n";
+		outFileStream << "@" << std::to_string(firstAddress) << "\n";
+		outFileStream << "M=D\n";
+	}
+	else if (command == Constants::NOT) {
+		outFileStream << "@" << secondAddress << "\n";
+		outFileStream << "M=!M\n";
+	}
 	uniqueSymbolCounter++;
 }
 
