@@ -38,22 +38,13 @@ void CodeWriter::writeArithmetic(const std::string& command, const int currentAd
 		writeComparisonLogicCommand("LESSTHAN", "JLT", firstAddress, secondAddress);
 	}
 	else if (command == Constants::AND) {
+		// comparisons
 		outFileStream << "@" << firstAddress << "\n";
-		outFileStream << "D=M+1\n";
-		outFileStream << "@NOTAND" << std::to_string(uniqueSymbolCounter) << "\n";
-		outFileStream << "D;JNE\n";
+		outFileStream << "D=M\n";
 		outFileStream << "@" << secondAddress << "\n";
-		outFileStream << "D=M+1\n";
-		outFileStream << "@NOTAND" << std::to_string(uniqueSymbolCounter) << "\n";
-		outFileStream << "D;JNE\n";
-		outFileStream << "@" << firstAddress << "\n";
-		outFileStream << "M=1\n";
-		outFileStream << "@END" << std::to_string(uniqueSymbolCounter) << "\n";
-		outFileStream << "0;JMP\n";
-		outFileStream << "\t(NOTAND" << std::to_string(uniqueSymbolCounter) << ")\n";
-		outFileStream << "@" << firstAddress << "\n";
-		outFileStream << "M=0\n";
-		outFileStream << "\t(END" << std::to_string(uniqueSymbolCounter) << ")\n";
+		outFileStream << "D=D&M\n";
+		outFileStream << "@" << std::to_string(firstAddress) << "\n";
+		outFileStream << "M=D\n";
 	}
 	uniqueSymbolCounter++;
 }
