@@ -13,29 +13,29 @@ void CodeWriter::writeArithmetic(const std::string& command, const int currentAd
 	// currentAddress is the next available empty address - use these to point to items
 	int firstAddress = currentAddress - 2;
 	int secondAddress = currentAddress - 1;
-	if (command == "add") {
+	if (command == Constants::ADD) {
 		outFileStream << "A=A-1" << "\n";
 		outFileStream << "D=M+D" << "\n";
 		outFileStream << "M=D" << "\n";
 	}
-	else if (command == "sub") {
+	else if (command == Constants::SUBTRACT) {
 		outFileStream << "A=A-1" << "\n";
 		outFileStream << "D=M-D" << "\n";
 		outFileStream << "M=D" << "\n";
 	}
-	else if (command == "neg") {
+	else if (command == Constants::NEGATE) {
 		outFileStream << "D=-M" << "\n";
 		outFileStream << "M=D" << "\n";
 	}
-	else if (command == "eq") {
-		writeLogicCommand("eq", "JEQ", firstAddress, secondAddress);
+	else if (command == Constants::EQUALS) {
+		writeLogicCommand("EQUALS", "JEQ", firstAddress, secondAddress);
 	}
-	else if (command == "gt") {
+	else if (command == Constants::GREATER_THAN) {
 		// checking if firstAddress is greater than secondAddress
-		writeLogicCommand("gt", "JGT", firstAddress, secondAddress);
+		writeLogicCommand("GREATERTHAN", "JGT", firstAddress, secondAddress);
 	}
-	else if (command == "lt") {
-		writeLogicCommand("lt", "JLT", firstAddress, secondAddress);
+	else if (command == Constants::LESS_THAN) {
+		writeLogicCommand("LESSTHAN", "JLT", firstAddress, secondAddress);
 	}
 	uniqueSymbolCounter++;
 }

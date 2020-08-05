@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
         else if (par.commandType() != VMCommandType::NONE) {
             par.arg1();
             writer.writeArithmetic(par.arg1(), address);
-            if (par.arg1() != "neg" && par.arg1() != "not") { 
+            if (par.arg1() != Constants::NEGATE && par.arg1() != Constants::NOT) { 
                 --address;
             }
         }

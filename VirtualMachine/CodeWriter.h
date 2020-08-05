@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include "VMEnums.h"
+#include "Constants.h"
 
 class CodeWriter {
 public:

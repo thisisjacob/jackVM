@@ -1,4 +1,5 @@
 #include "Parser.h"
+#include "Constants.h"
 
 Parser::Parser(const std::string& file) {
 	fileStream = std::ifstream(file);
@@ -34,37 +35,37 @@ std::string Parser::arg2() {
 }
 
 VMCommandType Parser::findCommandType(const std::string& command) {
-	if (command.compare("push") == 0) {
+	if (command.compare(Constants::PUSH) == 0) {
 		return VMCommandType::C_PUSH;
 	}
-	else if (command.compare("pop") == 0) {
+	else if (command.compare(Constants::POP) == 0) {
 		return VMCommandType::C_POP;
 	}
-	else if (command.compare("add") == 0) {
+	else if (command.compare(Constants::ADD) == 0) {
 		return VMCommandType::C_ARITHMETIC;
 	}
-	else if (command.compare("sub") == 0) {
+	else if (command.compare(Constants::SUBTRACT) == 0) {
 		return VMCommandType::C_ARITHMETIC;
 	}
-	else if (command.compare("neg") == 0) {
+	else if (command.compare(Constants::NEGATE) == 0) {
 		return VMCommandType::C_ARITHMETIC;
 	}
-	else if (command.compare("eq") == 0) {
+	else if (command.compare(Constants::EQUALS) == 0) {
 		return VMCommandType::C_ARITHMETIC;
 	}
-	else if (command.compare("gt") == 0) {
+	else if (command.compare(Constants::GREATER_THAN) == 0) {
 		return VMCommandType::C_ARITHMETIC;
 	}
-	else if (command.compare("lt") == 0) {
+	else if (command.compare(Constants::LESS_THAN) == 0) {
 		return VMCommandType::C_ARITHMETIC;
 	}
-	else if (command.compare("and") == 0) {
+	else if (command.compare(Constants::AND) == 0) {
 		return VMCommandType::C_ARITHMETIC;
 	}
-	else if (command.compare("or") == 0) {
+	else if (command.compare(Constants::OR) == 0) {
 		return VMCommandType::C_ARITHMETIC;
 	}
-	else if (command.compare("not") == 0) {
+	else if (command.compare(Constants::NOT) == 0) {
 		return VMCommandType::C_ARITHMETIC;
 	}
 	else {
